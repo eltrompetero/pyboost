@@ -70,3 +70,9 @@ Make sure everything compiled correctly by running
 ```bash
 $ python test.py
 ```
+
+
+## Resources
+[https://wiki.python.org/moin/boost.python/GettingStarted]
+Again, I recommend ignoring stuff about bjam and to just compile using g++:
+[https://www.boost.org/doc/libs/1_72_0/libs/python/doc/html/tutorial/index.html]
