@@ -12,20 +12,18 @@ A friend has also suggested numpy's C API, but I haven't taken a close look at t
 
 
 ## Installation
-Recommend downloading [source](https://www.boost.org/users/download/) and compiling
-yourself. A particular difficulty for me was that Python recently switched from v2 to v3
-and so my system (Debian) relied on Python 2.7 by default. You have to explicitly compile
-with Python 3 (see options in bootstrap.sh and explicit linking to the shared library
-".so" file in the shell scripts).
-
-Ignore references to b2 (and bjam, an old version of b2)! I was led down an unnecessary
-road for simple extensions. I think these tools are more helpful for developers compiling
-code for distribution. Not necessary for me, a scientist developing source for myself, to
-use. All you need is g++.
+Anaconda's "conda-forge" channel carries a compiled version of Boost.
+```bash
+$ conda install -c conda-forge boost==1.74.0
+```
 
 
 ## Troubleshooting
-Important to decide which version of Boost and which version of Python you are using.
+Important to decide which version of Boost and which version of Python you are using and
+the locations of the respective libraries and binaries. For the Anaconda install, you will
+need to make sure the compiler is seeing the files in side your environment's path and the
+folders "include", "include/python3.8", and "lib".
+
 Conflicting versions will give you errors (like symbol errors). You can make sure that the
 dynamic library you created is linking to the right libraries by using the command `ldd`.
 
@@ -52,6 +50,12 @@ import properly when I call it in Python 3.
 Make sure that the name of the boost extension as defined the C++ file
 (`BOOST_PYTHON_MODULE`) agrees with the library name.
 
+Ignore references to b2 (and bjam, an old version of b2)! I was led down an unnecessary
+road for simple extensions. I think these tools are more helpful for developers compiling
+code for distribution. Not necessary for me, a scientist developing source for myself, to
+use. All you need is g++.
+
+
 
 ## Examples
 I've created a simple "hello, world" example that puts all source into a single C++ source
@@ -70,9 +74,15 @@ Make sure everything compiled correctly by running
 ```bash
 $ python test.py
 ```
+This should print out
+```
+hello, world.
+hello, world.
+```
 
 
 ## Resources
 [https://wiki.python.org/moin/boost.python/GettingStarted]
+
 Again, I recommend ignoring stuff about bjam and to just compile using g++:
 [https://www.boost.org/doc/libs/1_72_0/libs/python/doc/html/tutorial/index.html]
